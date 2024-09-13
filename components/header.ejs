@@ -1,0 +1,77 @@
+<header class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-700 text-white">
+  <div class="container mx-auto px-6 py-4">
+    <div class="flex justify-between items-center">
+      <!-- Logo -->
+      <div class="flex items-center space-x-4">
+        <svg class="w-12 h-12" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- SVG logo here (simplified version of footer logo) -->
+        </svg>
+        <span class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">StyleHaven</span>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex space-x-8">
+        <a href="#" class="text-lg hover:text-pink-400 transition-colors duration-300">New Arrivals</a>
+        <a href="#" class="text-lg hover:text-pink-400 transition-colors duration-300">Bestsellers</a>
+        <a href="#" class="text-lg hover:text-pink-400 transition-colors duration-300">Sustainable</a>
+        <a href="#" class="text-lg hover:text-pink-400 transition-colors duration-300">Accessories</a>
+      </nav>
+
+      <!-- User Actions -->
+      <div class="flex items-center space-x-6">
+        <button class="hover:text-pink-400 transition-colors duration-300">
+          <i class="fas fa-search text-2xl"></i>
+        </button>
+        <button class="hover:text-pink-400 transition-colors duration-300">
+          <i class="fas fa-user text-2xl"></i>
+        </button>
+        <button class="hover:text-pink-400 transition-colors duration-300 relative">
+          <i class="fas fa-shopping-bag text-2xl"></i>
+          <span class="absolute -top-2 -right-2 bg-pink-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">3</span>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden hover:text-pink-400 transition-colors duration-300">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation (hidden by default) -->
+  <nav class="md:hidden bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg">
+    <div class="container mx-auto px-6 py-4">
+      <ul class="space-y-4">
+        <li><a href="#" class="block text-lg hover:text-pink-400 transition-colors duration-300">New Arrivals</a></li>
+        <li><a href="#" class="block text-lg hover:text-pink-400 transition-colors duration-300">Bestsellers</a></li>
+        <li><a href="#" class="block text-lg hover:text-pink-400 transition-colors duration-300">Sustainable</a></li>
+        <li><a href="#" class="block text-lg hover:text-pink-400 transition-colors duration-300">Accessories</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  const header = document.querySelector('header');
+  const mobileMenuButton = header.querySelector('.md\\:hidden');
+  const mobileNav = header.querySelector('nav.md\\:hidden');
+
+  // Hide mobile nav initially
+  mobileNav.classList.add('hidden');
+
+  // Toggle mobile nav
+  mobileMenuButton.addEventListener('click', () => {
+    mobileNav.classList.toggle('hidden');
+  });
+
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('bg-opacity-90', 'backdrop-filter', 'backdrop-blur-lg');
+    } else {
+      header.classList.remove('bg-opacity-90', 'backdrop-filter', 'backdrop-blur-lg');
+    }
+  });
+});
+</script>
