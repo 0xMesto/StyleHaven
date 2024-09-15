@@ -4,162 +4,517 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StyleHaven - Discover Your Style</title>
+    <meta name="description" content="StyleHaven - Discover your unique style with our curated fashion collections. Shop the latest trends and exclusive deals.">
     
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta3/css/all.min.css">
     
     <!-- Orbitron Font -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Playfair Display Font for headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Poppins Font for body text -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- AOS Library for scroll animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     
+    <!-- Custom CSS -->
     <style>
-        body {
-            font-family: 'Orbitron', sans-serif;
+        :root {
+            --primary-gradient: linear-gradient(to right, #4f46e5, #7e22ce, #ec4899);
         }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .parallax-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 130%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            will-change: transform;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .custom-shape-divider-bottom-1623184775 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .custom-shape-divider-bottom-1623184775 svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 150px;
+        }
+        .custom-shape-divider-bottom-1623184775 .shape-fill {
+            fill: #FFFFFF;
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: var(--primary-gradient);
+        }
+        .floating-nav {
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-100%);
+        }
+        .floating-nav.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        .hero-image {
+            transition: transform 0.5s ease;
+        }
+        .hero-image:hover {
+            transform: scale(1.05);
+        }
+        .magazine-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: minmax(200px, auto);
+            grid-gap: 2rem;
+        }
+
+        .quick-view {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .product-card:hover .quick-view {
+            opacity: 1;
+        }
+        .testimonial-card {
+            transition: transform 0.5s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-10px) rotateY(10deg);
+        }
+        .blog-card {
+            transition: transform 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        .newsletter-bg {
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"%3E%3Ccircle cx="2" cy="2" r="2" fill="%23ffffff" fill-opacity="0.1"/%3E%3C/svg%3E');
+            animation: backgroundScroll 20s linear infinite;
+        }
+        .bg-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M0 0h80v80H0V0zm20 20v40h40V20H20zm20 35a15 15 0 1 1 0-30 15 15 0 0 1 0 30z'/%3E%3C/g%3E%3C/svg%3E");
+    animation: patternMove 20s linear infinite;
+}
+
+@keyframes patternMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 80px 80px;
+    }
+}
+
+
+
+        @keyframes backgroundScroll {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+        .text-shadow-xl {
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+}
+.text-shadow-lg {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+.text-shadow-md {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.text-shadow-sm {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+
+@keyframes parallax {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientFlow 15s ease infinite;
+}
+
+.animate-parallax {
+    animation: parallax 20s ease-in-out infinite;
+}
+.hover\:shadow-glow:hover {
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+}
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50">
     <%- include('../components/header') %>
 
     <main>
-       <!-- Hero Section -->
-<section class="relative h-screen bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-700 overflow-hidden">
-    <div class="container mx-auto px-6 h-full flex items-center">
-        <div class="w-1/2 text-white" data-aos="fade-right">
-            <h1 class="text-7xl font-bold mb-6 leading-tight">Discover Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">Style</span> with StyleHaven</h1>
-            <p class="text-2xl mb-8 text-gray-300">Shop the latest trends and exclusive collections handpicked for you.</p>
-            <a href="#" class="bg-white text-purple-700 px-8 py-4 rounded-full text-xl font-semibold hover:bg-pink-400 hover:text-white transition duration-300 transform hover:scale-105">Shop Now</a>
-        </div>
-    </div>
-    <div class="absolute top-0 right-0 w-1/2 h-full">
-        <div class="swiper-container h-full">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="https://placeimg.com/800/1200/fashion" alt="Model 1" class="w-full h-full object-cover"></div>
-                <div class="swiper-slide"><img src="https://placeimg.com/800/1200/fashion" alt="Model 2" class="w-full h-full object-cover"></div>
-                <div class="swiper-slide"><img src="https://placeimg.com/800/1200/fashion" alt="Model 3" class="w-full h-full object-cover"></div>
-            </div>
-        </div>
-    </div>
-    <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-indigo-900 to-transparent"></div>
-</section>
-
-<!-- Features Section -->
-<section class="py-24 bg-gray-100">
-    <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold mb-16 text-center" data-aos="fade-up">Why Choose StyleHaven</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            <div class="bg-white rounded-lg p-8 shadow-lg transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-4xl mb-4 text-purple-600"><i class="fas fa-tshirt"></i></div>
-                <h3 class="text-xl font-semibold mb-2">Curated Collections</h3>
-                <p class="text-gray-600">Handpicked styles to match your unique taste.</p>
-            </div>
-            <div class="bg-white rounded-lg p-8 shadow-lg transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-4xl mb-4 text-pink-500"><i class="fas fa-truck"></i></div>
-                <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
-                <p class="text-gray-600">Get your fashion fix quickly and reliably.</p>
-            </div>
-            <div class="bg-white rounded-lg p-8 shadow-lg transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="300">
-                <div class="text-4xl mb-4 text-indigo-600"><i class="fas fa-leaf"></i></div>
-                <h3 class="text-xl font-semibold mb-2">Sustainable Fashion</h3>
-                <p class="text-gray-600">Eco-friendly options for conscious shoppers.</p>
-            </div>
-            <div class="bg-white rounded-lg p-8 shadow-lg transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="400">
-                <div class="text-4xl mb-4 text-purple-600"><i class="fas fa-undo"></i></div>
-                <h3 class="text-xl font-semibold mb-2">Easy Returns</h3>
-                <p class="text-gray-600">Hassle-free returns for your peace of mind.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Customer Testimonials Section -->
-<section class="py-24 bg-white">
-    <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold mb-16 text-center" data-aos="fade-up">What Our Customers Say</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div class="bg-gradient-to-br from-purple-100 to-pink-100 p-8 rounded-lg shadow-lg relative" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-6xl text-pink-300 absolute top-4 left-4 opacity-50"><i class="fas fa-quote-left"></i></div>
-                <p class="text-xl mb-6 relative z-10">"StyleHaven made my shopping experience so easy! The clothes are high-quality, and delivery was super fast!"</p>
-                <div class="flex items-center">
-                    <img src="https://placeimg.com/60/60/people" alt="Sarah W." class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                        <p class="font-semibold">Sarah W.</p>
-                        <p class="text-sm text-gray-600">Fashionista</p>
+        <section class="relative h-screen overflow-hidden">
+            <div class="parallax-bg animate-parallax" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+            <div class="absolute inset-0 bg-black opacity-60"></div>
+            <div class="container mx-auto px-6 h-full flex items-center relative z-10">
+                <div class="w-full md:w-2/3 text-white">
+                    <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-tight animate-pulse text-shadow-xl">
+                        Discover Your <span class="text-gradient animate-gradient">Style</span>
+                    </h1>
+                    <p class="text-2xl md:text-3xl mb-12 text-gray-200 max-w-3xl text-shadow-md">Elevate your wardrobe with our curated collections and exclusive deals.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#" class="bg-white text-purple-700 px-8 py-4 rounded-full text-xl font-semibold hover:bg-pink-400 hover:text-white transition duration-300 transform hover:scale-105 inline-block shadow-lg text-center hover:shadow-glow" aria-label="Shop Now">Shop Now</a>
+                        <a href="#" class="border-2 border-white text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-white hover:text-purple-700 transition duration-300 transform hover:scale-105 inline-block shadow-lg text-center" aria-label="Learn More">Learn More</a>
                     </div>
                 </div>
             </div>
-            <div class="bg-gradient-to-br from-indigo-100 to-purple-100 p-8 rounded-lg shadow-lg relative" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-6xl text-indigo-300 absolute top-4 left-4 opacity-50"><i class="fas fa-quote-left"></i></div>
-                <p class="text-xl mb-6 relative z-10">"I love how personalized the recommendations are. It's like they know my style better than I do!"</p>
-                <div class="flex items-center">
-                    <img src="https://placeimg.com/60/60/people" alt="Jane M." class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                        <p class="font-semibold">Jane M.</p>
-                        <p class="text-sm text-gray-600">Style Enthusiast</p>
-                    </div>
+            <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-8 mb-12">
+                <% const categories = [
+                    { name: "Summer Collection", image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1005&q=80", link: "#summer-collection" },
+                    { name: "Accessories", image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1020&q=80", link: "#accessories" },
+                    { name: "New Arrivals", image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80", link: "#new-arrivals" }
+                ] %>
+                <% categories.forEach(category => { %>
+                    <a href="<%= category.link %>" class="group relative w-32 h-32 md:w-40 md:h-40 bg-white bg-opacity-20 rounded-full flex flex-col items-center justify-center overflow-hidden transition-all duration-300 transform hover:scale-110 hover:bg-opacity-30 hover:shadow-glow">
+                        <div class="absolute inset-0 bg-black opacity-30 transition-opacity duration-300 group-hover:opacity-50"></div>
+                        <img src="<%= category.image %>" alt="<%= category.name %>" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                        <span class="absolute bottom-0 left-0 right-0 text-white text-sm md:text-lg font-semibold py-2 px-4 bg-gradient-to-t from-black to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"><%= category.name %></span>
+                    </a>
+                <% }) %>
+            </div>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                <div class="animate-bounce">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
                 </div>
             </div>
+        </section>
+        
+        
+        
+        
+
+
+        <!-- Improved Floating Navigation -->
+        <nav class="floating-nav fixed top-0 left-0 right-0 bg-white bg-opacity-90 shadow-md z-50 py-4">
+            <div class="container mx-auto px-6 flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-purple-700">StyleHaven</a>
+                <div class="space-x-6">
+                    <a href="#trending" class="text-gray-800 hover:text-purple-700 transition duration-300">Trending</a>
+                    <a href="#featured" class="text-gray-800 hover:text-purple-700 transition duration-300">Featured</a>
+                    <a href="#blog" class="text-gray-800 hover:text-purple-700 transition duration-300">Blog</a>
+                </div>
+            </div>
+        </nav>
+
+      <!-- Improved Trending Categories Section with Asymmetrical Grid and Hover Effects -->
+<section id="trending" class="py-24 bg-gray-100">
+    <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-bold mb-12 text-center text-gray-800" data-aos="fade-up">Trending Categories</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <a href="#" class="category-card col-span-2 row-span-2 bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative h-full group">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Women's Fashion" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 group-hover:opacity-80 transition duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition duration-300">
+                        <h3 class="text-3xl font-semibold text-white mb-2">Women's Fashion</h3>
+                        <p class="text-white text-lg opacity-0 group-hover:opacity-100 transition duration-300">Discover the latest trends in women's clothing and accessories</p>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="category-card bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                <div class="relative h-full group">
+                    <img src="https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Men's Fashion" class="w-full h-64 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 group-hover:opacity-80 transition duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-2 group-hover:translate-y-0 transition duration-300">
+                        <h3 class="text-xl font-semibold text-white mb-2">Men's Fashion</h3>
+                        <p class="text-white text-sm opacity-0 group-hover:opacity-100 transition duration-300">Elevate your style with our men's collection</p>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="category-card bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                <div class="relative h-full group">
+                    <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Accessories" class="w-full h-64 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 group-hover:opacity-80 transition duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-2 group-hover:translate-y-0 transition duration-300">
+                        <h3 class="text-xl font-semibold text-white mb-2">Accessories</h3>
+                        <p class="text-white text-sm opacity-0 group-hover:opacity-100 transition duration-300">Complete your look with our stylish accessories</p>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="category-card bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-delay="400">
+                <div class="relative h-full group">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1412&q=80" alt="Shoes" class="w-full h-64 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 group-hover:opacity-80 transition duration-300"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-2 group-hover:translate-y-0 transition duration-300">
+                        <h3 class="text-xl font-semibold text-white mb-2">Shoes</h3>
+                        <p class="text-white text-sm opacity-0 group-hover:opacity-100 transition duration-300">Step out in style with our footwear collection</p>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </section>
 
 
-        <!-- Featured Products Section -->
-        <section class="py-24 bg-white">
+     <!-- Improved Features Section with Animations and Consistent Background -->
+<section class="py-32 bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-700 text-white relative overflow-hidden animate-gradient">
+    <div class="absolute inset-0 bg-pattern opacity-10"></div>
+    <div class="container mx-auto px-6 relative z-10">
+        <h2 class="text-5xl font-bold mb-6 text-center text-shadow" data-aos="fade-up">Why Choose StyleHaven</h2>
+        <div class="w-24 h-1 bg-pink-400 mx-auto mb-12 rounded-full"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+            <div class="bg-white bg-opacity-10 rounded-lg p-8 shadow-lg transform hover:scale-105 transition duration-300 border border-pink-400 hover:border-pink-300 hover:shadow-glow" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-6xl mb-8 text-pink-400 transform transition-all duration-300 hover:rotate-12 hover:scale-110">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-4 text-shadow">Curated Collections</h3>
+                <p class="text-gray-300">Handpicked styles to match your unique taste and preferences.</p>
+            </div>
+            <div class="bg-white bg-opacity-10 rounded-lg p-8 shadow-lg transform hover:scale-105 transition duration-300 border border-pink-400 hover:border-pink-300 hover:shadow-glow" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-6xl mb-8 text-pink-400 transform transition-all duration-300 hover:rotate-12 hover:scale-110">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-4 text-shadow">Fast Delivery</h3>
+                <p class="text-gray-300">Get your fashion fix quickly and reliably, right to your doorstep.</p>
+            </div>
+            <div class="bg-white bg-opacity-10 rounded-lg p-8 shadow-lg transform hover:scale-105 transition duration-300 border border-pink-400 hover:border-pink-300 hover:shadow-glow" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-6xl mb-8 text-pink-400 transform transition-all duration-300 hover:rotate-12 hover:scale-110">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-4 text-shadow">Sustainable Fashion</h3>
+                <p class="text-gray-300">Eco-friendly options for environmentally conscious shoppers.</p>
+            </div>
+            <div class="bg-white bg-opacity-10 rounded-lg p-8 shadow-lg transform hover:scale-105 transition duration-300 border border-pink-400 hover:border-pink-300 hover:shadow-glow" data-aos="fade-up" data-aos-delay="400">
+                <div class="text-6xl mb-8 text-pink-400 transform transition-all duration-300 hover:rotate-12 hover:scale-110">
+                    <i class="fas fa-undo"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-4 text-shadow">Easy Returns</h3>
+                <p class="text-gray-300">Hassle-free returns for your peace of mind and satisfaction.</p>
+            </div>
+        </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+    </div>
+</section>
+
+
+
+
+        <!-- Improved Featured Products Section with Magazine-style Layout -->
+        <section id="featured" class="py-32 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold mb-12 text-center" data-aos="fade-up">New Arrivals</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                    <% for (let i = 0; i < 6; i++) { %>
-                        <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
-                            <img src="https://via.placeholder.com/400x300.png" alt="Product <%= i+1 %>" class="w-full h-64 object-cover">
+                <h2 class="text-5xl font-bold mb-16 text-center text-gray-800" data-aos="fade-up">New Arrivals</h2>
+                <div class="magazine-layout">
+                    <% const products = [
+                        { name: "Elegant Summer Dress", price: 129.99, image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1020&q=80" },
+                        { name: "Classic Leather Jacket", price: 249.99, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80" },
+                        { name: "Trendy Sunglasses", price: 79.99, image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80" },
+                        { name: "Comfortable Sneakers", price: 109.99, image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" },
+                        { name: "Stylish Watch", price: 199.99, image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1099&q=80" },
+                        { name: "Designer Handbag", price: 299.99, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80" },
+                        { name: "Cozy Knit Sweater", price: 89.99, image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" },
+                        { name: "Slim Fit Jeans", price: 79.99, image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" },
+                        { name: "Boho Maxi Skirt", price: 69.99, image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" },
+                    ] %>
+                    <% products.forEach((product, index) => { %>
+                        <div class="product-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                            <div class="relative">
+                                <img src="<%= product.image %>" alt="<%= product.name %>" class="w-full h-64 object-cover">
+                                <div class="quick-view absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                                    <button class="bg-white text-gray-800 px-4 py-2 rounded-full hover:bg-pink-500 hover:text-white transition duration-300">Quick View</button>
+                                </div>
+                            </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2">Product Name</h3>
-                                <p class="text-gray-600 mb-4">Brief product description goes here.</p>
+                                <h3 class="text-xl font-semibold mb-2"><%= product.name %></h3>
+                                <p class="text-gray-600 mb-4">Elevate your style with this stunning piece.</p>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-purple-700">$99.99</span>
-                                    <button class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition duration-300">Add to Cart</button>
+                                    <span class="text-2xl font-bold text-purple-700">$<%= product.price.toFixed(2) %></span>
+                                    <button class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition duration-300 transform hover:scale-105" aria-label="Add <%= product.name %> to Cart">Add to Cart</button>
                                 </div>
                             </div>
                         </div>
-                    <% } %>
+                    <% }) %>
                 </div>
             </div>
         </section>
 
-        <!-- Special Offers Section -->
-        <section class="py-24 bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-700 text-white">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Exclusive Deals</h2>
-                <p class="text-3xl mb-4" data-aos="fade-up" data-aos-delay="100">Up to 50% Off on Summer Collection</p>
-                <p class="text-xl mb-8" data-aos="fade-up" data-aos-delay="200">Hurry! Limited time offer on select styles.</p>
-                <a href="#" class="bg-white text-purple-700 px-8 py-4 rounded-full text-xl font-semibold hover:bg-pink-400 hover:text-white transition duration-300" data-aos="fade-up" data-aos-delay="300">Shop Sale</a>
+        <!-- Improved Testimonials Section with 3D Cards and Consistent Background -->
+<section class="py-32 bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-700 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-pattern opacity-10"></div>
+    <div class="container mx-auto px-6 relative z-10">
+        <h2 class="text-5xl font-bold mb-20 text-center" data-aos="fade-up">What Our Customers Say</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="testimonial-card bg-white bg-opacity-10 p-10 rounded-lg shadow-lg relative transform transition duration-500 hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-7xl text-pink-400 absolute top-4 left-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                <p class="text-xl mb-8 relative z-10">"StyleHaven has completely transformed my wardrobe! The curated collections and personalized recommendations make shopping a breeze. I've never felt more confident in my style choices."</p>
+                <div class="flex items-center">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Sarah W." class="w-16 h-16 rounded-full mr-4 object-cover">
+                    <div>
+                        <p class="font-semibold text-xl">Sarah W.</p>
+                        <p class="text-sm text-gray-300">Fashion Enthusiast</p>
+                    </div>
+                </div>
             </div>
-        </section>
+            <div class="testimonial-card bg-white bg-opacity-10 p-10 rounded-lg shadow-lg relative transform transition duration-500 hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-7xl text-pink-400 absolute top-4 left-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                <p class="text-xl mb-8 relative z-10">"The quality of clothes and accessories from StyleHaven is unmatched. I love how they blend trendy pieces with timeless classics. It's my go-to for all things fashion!"</p>
+                <div class="flex items-center">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Michael R." class="w-16 h-16 rounded-full mr-4 object-cover">
+                    <div>
+                        <p class="font-semibold text-xl">Michael R.</p>
+                        <p class="text-sm text-gray-300">Style Connoisseur</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card bg-white bg-opacity-10 p-10 rounded-lg shadow-lg relative transform transition duration-500 hover:scale-105" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-7xl text-pink-400 absolute top-4 left-4 opacity-50"><i class="fas fa-quote-left"></i></div>
+                <p class="text-xl mb-8 relative z-10">"StyleHaven's customer service is exceptional. They went above and beyond to help me find the perfect outfit for a special occasion. I'm a customer for life!"</p>
+                <div class="flex items-center">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Emily S." class="w-16 h-16 rounded-full mr-4 object-cover">
+                    <div>
+                        <p class="font-semibold text-xl">Emily S.</p>
+                        <p class="text-sm text-gray-300">Loyal Customer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+    </div>
+</section>
 
-        <!-- Customer Testimonials Section -->
-        <section class="py-24 bg-white">
+
+
+        <!-- Improved Style Guide Blog Section with Magazine-style Layout -->
+        <section id="blog" class="py-24 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold mb-12 text-center" data-aos="fade-up">What Our Customers Say</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div class="bg-gray-100 p-8 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                        <p class="text-xl mb-4">"StyleHaven made my shopping experience so easy! The clothes are high-quality, and delivery was super fast!"</p>
-                        <p class="font-semibold">– Sarah W.</p>
+                <h2 class="text-5xl font-bold mb-12 text-center text-gray-800" data-aos="fade-up">Style Guide</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="blog-card bg-gray-100 rounded-lg overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Summer Fashion Trends" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2">Summer Fashion Trends</h3>
+                            <p class="text-gray-600 mb-4">Discover the hottest styles for this summer season.</p>
+                            <a href="#" class="text-purple-600 hover:text-purple-800 font-semibold">Read More</a>
+                        </div>
                     </div>
-                    <div class="bg-gray-100 p-8 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
-                        <p class="text-xl mb-4">"I love how personalized the recommendations are. It's like they know my style better than I do!"</p>
-                        <p class="font-semibold">– Jane M.</p>
+                    <div class="blog-card bg-gray-100 rounded-lg overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1030&q=80" alt="Accessorizing 101" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2">Accessorizing 101</h3>
+                            <p class="text-gray-600 mb-4">Learn how to elevate your outfit with the right accessories.</p>
+                            <a href="#" class="text-purple-600 hover:text-purple-800 font-semibold">Read More</a>
+                        </div>
                     </div>
+                    <div class="blog-card bg-gray-100 rounded-lg overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Sustainable Fashion Guide" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2">Sustainable Fashion Guide</h3>
+                            <p class="text-gray-600 mb-4">Tips for building an eco-friendly wardrobe.</p>
+                            <a href="#" class="text-purple-600 hover:text-purple-800 font-semibold">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="#" class="bg-purple-600 text-white px-8 py-3 rounded-full inline-block hover:bg-purple-700 transition duration-300 text-lg font-semibold transform hover:scale-105">View All Posts</a>
                 </div>
             </div>
         </section>
+
+     <!-- Enhanced Newsletter Signup Section with Animated Background and Interactive Elements -->
+<section class="py-24 bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-700 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-pattern opacity-10"></div>
+    <div class="container mx-auto px-6 text-center relative z-10">
+        <h2 class="text-5xl font-bold mb-6" data-aos="fade-up">Stay Ahead in Style</h2>
+        <p class="text-2xl mb-12" data-aos="fade-up" data-aos-delay="100">Join our fashion-forward community for exclusive deals, style tips, and early access to new collections</p>
+        <form id="newsletter-form" class="max-w-lg mx-auto" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex flex-col sm:flex-row">
+                <input type="email" id="email-input" placeholder="Your email address" class="flex-grow px-6 py-4 rounded-full sm:rounded-r-none mb-4 sm:mb-0 focus:outline-none focus:ring-2 focus:ring-purple-600 text-gray-900" required>
+                <button type="submit" class="bg-purple-600 text-white px-8 py-4 rounded-full sm:rounded-l-none hover:bg-purple-700 transition duration-300 text-lg font-semibold transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                    <span class="mr-2">Subscribe</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </form>
+        <div id="subscription-message" class="mt-6 text-lg hidden"></div>
+        <div class="mt-12 flex justify-center space-x-6">
+            <a href="#" class="text-white hover:text-pink-300 transition duration-300 transform hover:scale-110">
+                <i class="fab fa-instagram text-3xl"></i>
+            </a>
+            <a href="#" class="text-white hover:text-pink-300 transition duration-300 transform hover:scale-110">
+                <i class="fab fa-facebook text-3xl"></i>
+            </a>
+            <a href="#" class="text-white hover:text-pink-300 transition duration-300 transform hover:scale-110">
+                <i class="fab fa-twitter text-3xl"></i>
+            </a>
+        </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+    </div>
+</section>
+
+
+        <!-- Decorative Spacing Element -->
+        <div class="py-16 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="flex justify-center">
+                    <div class="w-16 h-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <%- include('../components/footer') %>
@@ -174,14 +529,79 @@
                 once: true,
             });
 
-            new Swiper('.swiper-container', {
-                loop: true,
-                autoplay: {
-                    delay: 5000,
-                },
-                effect: 'fade',
+            new Swiper('.testimonials-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+        delay: 5000,
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+});
+
+
+            // Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+
+            // Parallax effect for hero section
+            window.addEventListener('scroll', () => {
+    const parallax = document.querySelector('.parallax-bg');
+    let scrollPosition = window.pageYOffset;
+    parallax.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+});
+
+
+            // Vanilla Tilt for product cards
+            VanillaTilt.init(document.querySelectorAll(".product-card"), {
+                max: 25,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.5,
             });
+
+            // Floating navigation
+            const floatingNav = document.querySelector('.floating-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    floatingNav.classList.add('visible');
+                } else {
+                    floatingNav.classList.remove('visible');
+                }
+            });
+
+    const form = document.getElementById('newsletter-form');
+    const emailInput = document.getElementById('email-input');
+    const message = document.getElementById('subscription-message');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simulating an API call
+        setTimeout(() => {
+            message.textContent = `Thank you for subscribing! We've sent a confirmation to ${emailInput.value}`;
+            message.classList.remove('hidden');
+            message.classList.add('text-green-300');
+            form.reset();
+
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                message.classList.add('hidden');
+            }, 5000);
+        }, 1000);
+    });
         });
     </script>
 </body>
 </html>
+
